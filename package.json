@@ -1,0 +1,37 @@
+{
+  "name": "ibird-service",
+  "version": "0.9.0",
+  "description": "The data service module of ibird.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinfxs/ibird-service.git"
+  },
+  "keywords": [
+    "ibird",
+    "node",
+    "mongodb",
+    "redis",
+    "koa",
+    "mongoosejs",
+    "web",
+    "app",
+    "http",
+    "application",
+    "framework",
+    "service"
+  ],
+  "author": "yinfxs",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/yinfxs/ibird-service/issues"
+  },
+  "homepage": "https://github.com/yinfxs/ibird-service#readme",
+  "dependencies": {
+    "ibird-raml": "^0.9.0"
+  },
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "devDependencies": {}
+}
