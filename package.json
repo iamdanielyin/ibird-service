@@ -1,6 +1,6 @@
 {
   "name": "ibird-service",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "The data service module of ibird.",
   "main": "index.js",
   "repository": {
@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/yinfxs/ibird-service#readme",
   "dependencies": {
-    "ibird-raml": "^0.9.1"
+    "ibird-raml": "latest"
   },
   "engines": {
     "node": ">= 7.6.0"
