@@ -10,6 +10,47 @@ const app = {};
 
 module.exports = app;
 
+const cache = { services: {}, users: {} };
+
+/**
+ * 接口初始化配置
+ * @param obj 配置对象
+ */
+app.config = (obj) => {
+    if (!obj || typeof obj !== 'object') return;
+    cache.services = obj;
+};
+/**
+ * 用户接口初始化配置
+ * @param obj 配置对象
+ */
+app.users = (obj) => {
+    if (!obj || typeof obj !== 'object') return;
+    Object.assign(cache.users, obj);
+};
+
+/**
+ * 获取接口列表
+ * @param key 接口编码
+ * @param unionid
+ */
+app.get = (key, unionid) => {
+    let api = null;
+    if (unionid) {
+        if (typeof cache.users !== 'object') return {};
+        if (typeof cache.users[unionid] !== 'object') return {};
+        api = cache.users[unionid][key];
+    } else {
+        if (typeof cache.services !== 'object') return {};
+        api = cache.services[key];
+    }
+    if (typeof api !== 'object') return [];
+    const query = api.queryParameters || [];
+    const body = api.body || [];
+    return query.concat(body);
+};
+
+
 /**
  * 根据ibird的配置对象生成的服务接口列表
  * @param config
@@ -19,11 +60,11 @@ app.services = (config) => {
     raml.modelApis(apis, config);
     raml.routeApis(apis, config);
 
-    let result = [];
+    const result = {};
     for (const uri in apis) {
         const obj = apis[uri];
         if (!uri || typeof obj !== 'object') continue;
-        result = result.concat(methods(config, uri, obj));
+        Object.assign(result, methods(config, uri, obj));
     }
     return result;
 };
@@ -37,14 +78,14 @@ app.services = (config) => {
  */
 const methods = (config, uri, obj) => {
     const types = raml.modelTypes(config);
-    const result = [];
+    const result = {};
 
     for (const method in obj) {
         if (!method) continue;
         const conf = obj[method];
-        const _id = `${uri}|${method.toUpperCase()}`;
+        const code = `${uri}|${method.toUpperCase()}`;
         const object = {
-            _id: _id,
+            code: code,
             uri: uri,
             method: method.toUpperCase(),
             displayName: conf.displayName,
@@ -70,7 +111,7 @@ const methods = (config, uri, obj) => {
             }
             object.body = app.fields(properties);
         }
-        result.push(object);
+        result[code] = object;
     }
     return result;
 };

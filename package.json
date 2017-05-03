@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/yinfxs/ibird-service#readme",
   "dependencies": {
-    "ibird-raml": "^0.9.0"
+    "ibird-raml": "^0.9.1"
   },
   "engines": {
     "node": ">= 7.6.0"
