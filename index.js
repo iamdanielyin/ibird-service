@@ -6,6 +6,7 @@
  */
 
 const raml = require('ibird-raml');
+const fieldsRoute = require('./route/fields');
 const app = {};
 
 module.exports = app;
@@ -130,4 +131,12 @@ app.fields = (fields) => {
         result.push(field);
     }
     return result;
+};
+
+/**
+ * 导出内置路由
+ * @param app
+ */
+app.route = (router) => {
+    router.get('/service/fields', fieldsRoute);
 };
