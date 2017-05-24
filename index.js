@@ -6,7 +6,6 @@
  */
 
 const raml = require('ibird-raml');
-const fieldsRoute = require('./route/fields');
 const app = {};
 
 module.exports = app;
@@ -138,5 +137,5 @@ app.fields = (fields) => {
  * @param app
  */
 app.route = (router) => {
-    router.get('/service/fields', fieldsRoute);
+    router.get('/service/fields', require('./route/fields'));
 };
